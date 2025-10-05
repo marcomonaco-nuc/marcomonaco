@@ -119,7 +119,7 @@ h1 {
 
 
 /* --- Responsive --- */
-@media (min-width: 1000px) {
+@media (min-width: 900px) {
   .spotify-player iframe {
     height: 200px; /* !!! bigger player on large screens */
     width: auto;
@@ -127,10 +127,18 @@ h1 {
   }
 }
 
-@media (max-width: 1000px) {
-.gallery {
+@media (max-width: 900px) {
+  .gallery {
   columns: 5 100px;
-  column-gap: 10px;
+  column-gap: 7px;
+  }
+  
+  .img-wrapper { /* !!! new: wrapper for fade-in */
+  margin-bottom: 7px;
+  }
+
+  .img-wrapper img {
+  border-radius: 5px;
   }
   .lightbox-content {
     flex-direction: column; /* !!! stack vertically on smaller screens */
@@ -157,4 +165,3 @@ h1 {
     height: 100px; /* !!! bigger player on large screens */
     width: auto;
 }
-
