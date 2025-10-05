@@ -129,7 +129,8 @@ h1 {
 
 @media (max-width: 1000px) {
 .gallery {
-  columns: 5 100px; 
+  columns: 5 100px;
+  column-gap: 10px;
   }
   .lightbox-content {
     flex-direction: column; /* !!! stack vertically on smaller screens */
@@ -156,3 +157,4 @@ h1 {
     height: 100px; /* !!! bigger player on large screens */
     width: auto;
 }
+
