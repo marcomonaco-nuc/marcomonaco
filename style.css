@@ -12,25 +12,28 @@ h1 {
 
 /* The grid container */
 .gallery {
-  columns: 6 180px; /* # columns, each ~###px wide */
+  columns: 5 180px; /* # columns, each ~###px wide */
   column-gap: 15px;
   max-width: width;
   margin: 0 auto;
 }
 
-/* The images inside */
-.gallery img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  display: block;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.img-wrapper { /* !!! new: wrapper for fade-in */
+  opacity: 0;
+  transform: translateY(20px);
+  margin-bottom: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Add a hover effect */
-.gallery img:hover {
+.img-wrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);  
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* !!! hover scale independent */
+}
+
+.img-wrapper img:hover {
   transform: scale(1.03);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
@@ -48,58 +51,58 @@ h1 {
   transition: opacity 0.3s ease;
 }
 
-/* When active */
 .lightbox.active {
   display: flex;
   opacity: 1;
 }
 
+
 /* --- Lightbox Content --- */
 .lightbox-content {
-  text-align: left; /* !!! modified */
-  display: flex; /* !!! modified */
-  gap: 20px; /* space between image and info */ /* !!! new */
+  display: flex;
+  flex-direction: row; /* !!! new: side-by-side layout by default */
+  align-items: flex-start; /* top-align image and info */
+  text-align: left;
+  gap: 30px; /* !!! increased space between image and info */
   max-width: 90%;
   max-height: 90%;
-  align-items: flex-start; /* align top */
   animation: fadeIn 0.4s ease;
 }
 
-/* !!! new: info column styling */
-.lightbox-info {
+.lightbox-content img {
+  max-height: 80vh;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
+/* --- Info Column (caption + Spotify) --- */
+.lightbox-info { /* !!! new */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  flex: 1; /* take remaining space */
-}
-
-.lightbox img {
-  max-width: 90%;
-  max-height: 80vh;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  align-items: flex-start;
+  flex: 1; /* take remaining horizontal space */
+  gap: 15px; /* !!! space between caption and Spotify player */
+  color: #f1f1f1;
 }
 
 /* Description text */
 .caption {
-  color: #f1f1f1;
-  margin-top: 0; /* !!! modified for column layout */
+  margin: 0;
   font-size: 1rem;
   line-height: 1.4;
 }
 
+/* Spotify Player */
 .spotify-player {
-  margin-top: 10px; /* !!! modified */
+  width: 100%;
   display: flex;
-  justify-content: flex-start; /* !!! modified */
+  justify-content: flex-start;
 }
 
 .spotify-player iframe {
-  width: 100%; /* !!! modified: responsive width */
-  height: 100px;
-  max-width: 400px; /* default width for narrow/medium screens */ /* !!! modified */
-  max-height: 300px;
   border-radius: 12px;
+  transition: height 0.3s ease; /* !!! smoother resizing */
 }
 
 /* --- Animation Keyframes --- */
@@ -116,40 +119,40 @@ h1 {
 
 
 /* --- Responsive --- */
-/* Larger Spotify player on wide screens */
-@media (min-width: 1200px) {
+@media (min-width: 1000px) {
   .spotify-player iframe {
-    width: 100%; /* !!! new */
-    height: 300px;
+    height: 200px; /* !!! bigger player on large screens */
+    width: auto;
+    min-width: 500px;
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
+.gallery {
+  columns: 5 100px; 
+  }
   .lightbox-content {
-    flex-direction: column; /* stack on mobile */ /* !!! modified */
-    align-items: center; /* !!! modified */
-    text-align: center; /* !!! modified */
+    flex-direction: column; /* !!! stack vertically on smaller screens */
+    align-items: center;
+    text-align: center;
+    gap: 20px; /* tighter spacing when stacked */
   }
 
   .lightbox-content img {
-    max-width: 90%; /* image takes full width on mobile */ /* !!! modified */
+    width: auto;
+    max-width: 80%;
+    height: auto;
+  }
+
+  .lightbox-info {
+    align-items: center; /* center caption + player on mobile */
   }
 
   .spotify-player {
-    justify-content: center; /* center on small screens */ /* !!! modified */
+    justify-content: center;
   }
 
-  .caption {
-    margin-top: 10px; /* spacing below image */ /* !!! modified */
-  }
-}
-
-@media (max-width: 500px) {
-  .gallery {
-    columns: 3;
-  }
-
-  .caption {
-    font-size: 0.9rem;
-  }
+  .spotify-player iframe {
+    height: 100px; /* !!! bigger player on large screens */
+    width: auto;
 }
