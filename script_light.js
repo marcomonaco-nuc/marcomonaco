@@ -25,7 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
       wrapper.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
       wrapper.style.opacity = 1;
       wrapper.style.transform = 'translateY(0)';
-    }, i * 20); // stagger 100ms per image
+    }, i * 50); // stagger 100ms per image
   });
 });
 
