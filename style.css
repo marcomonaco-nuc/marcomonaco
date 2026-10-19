@@ -9,7 +9,6 @@ body {
 h1 {
   margin-bottom: 20px;
 }
-
 /* The grid container */
 .gallery {
   columns: 6 180px; /* # columns, each ~###px wide */
